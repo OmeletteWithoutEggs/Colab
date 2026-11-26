@@ -1,5 +1,5 @@
-import raylibpy as raylib
-from raylibpy import Color
+import pyray as raylib
+from pyray import Color
 from source.vectors import Vector2
 
 class Renderer:

@@ -1,5 +1,5 @@
-lazy import raylibpy as raylib
-from raylibpy import Color
+lazy import pyray as raylib
+from pyray import Color
 from source.vectors import Vector2
 from source.rendering import Renderer
 import enum
