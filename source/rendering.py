@@ -67,19 +67,19 @@ class Renderer:
         raylib.close_window()
 
     def drawRectanglePro(self,position,size,origin,rotation,colour):
-        if not isinstance(colour,Color):
+        if not isinstance(colour,type(Color)):
             colour = Color(*colour)
         rectangle = raylib.Rectangle(position[0],position[1],size[0],size[1])
         origin = raylib.Vector2(origin[0],origin[1])
         raylib.draw_rectangle_pro(rectangle,origin,rotation,colour)
 
     def drawRectangle(self,position,size,colour):
-        if not isinstance(colour,Color):
+        if not isinstance(colour,type(Color)):
             colour = Color(*colour)
         raylib.draw_rectangle(position[0],position[1],size[0],size[1],colour)
 
     def drawLineDashed(self,startPos,endPos,dashLength, dashSpacing,colour):
-        if not isinstance(colour,Color):
+        if not isinstance(colour,type(Color)):
             colour = Color(*colour)
         p1 = raylib.Vector2(startPos[0],startPos[1])
         p2 = raylib.Vector2(endPos[0],endPos[1])
@@ -95,13 +95,13 @@ class Renderer:
 
 
     def drawCircle(self,position,radius,colour):
-        if not isinstance(colour,Color):
+        if not isinstance(colour,type(Color)):
             colour = Color(*colour)
         position = raylib.Vector2(position[0],position[1])
         raylib.draw_circle_v(position,radius,colour)
 
     def drawRectangleLines(self,position,size,thickness,colour):
-        if not isinstance(colour,Color):
+        if not isinstance(colour,type(Color)):
             colour = Color(*colour)
         rect = raylib.Rectangle(position[0],position[1],size[0],size[1])
         raylib.draw_rectangle_lines_ex(rect,thickness,colour)
@@ -114,7 +114,7 @@ class Renderer:
 
         if not self.font:
             raise Exception("font not loaded")
-        if not isinstance(colour,Color):
+        if not isinstance(colour,type(Color)):
             colour = Color(*colour)
 
         textWidth = raylib.measure_text_ex(self.font,text,size,spacing)[0]

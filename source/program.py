@@ -2,6 +2,7 @@ import pyray as raylib
 from pyray import Color
 from source.vectors import Vector2
 from source.rendering import Renderer
+from source.player import Player
 import enum
 import time
 import random
@@ -21,6 +22,8 @@ class Program:
         self.renderer.loadFont("assets\\fonts\\firjar\\Firjar-Bold.ttf")
         self.camera = self.renderer.camera
 
+        self.player = Player((0,0),(30,30))
+
     def start(self):
         self.runStart = time.time()
         self.state = GameStates.RUNNING
@@ -38,20 +41,23 @@ class Program:
                 case GameStates.RUNNING:
                     self.tick()
                 case GameStates.PAUSED:
-                    if raylib.is_key_pressed(raylib.KEY_ENTER):
-                        self.start()
+                    
+                    self.start()
 
             self.render()
 
 
     def tick(self):
         self.deltaTime = raylib.get_frame_time()
+        self.player.handleInput()
+        self.player.updatePhysics(self.deltaTime)
 
     def renderDebug(self):
         raylib.draw_fps(10,10)
 
     def render(self):
         with self.renderer:
+            self.player.draw(self.renderer)
 
 
             if self.debugMode:
