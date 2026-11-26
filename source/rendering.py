@@ -1,6 +1,22 @@
 import pyray as raylib
 from pyray import Color
 from source.vectors import Vector2
+from dataclasses import dataclass
+
+@dataclass(init=True)
+class Texture2D:
+    texture : raylib.Texture
+    def __init__(self,path):
+        if path:
+            self.texture = raylib.load_texture(path)
+
+    @property
+    def width(self):
+        return self.texture.width
+
+    @property
+    def height(self):
+        return self.texture.height
 
 class Renderer:
     def __init__(self,width,height,title,SSAA_SCALE = 2):
@@ -137,5 +153,8 @@ class Renderer:
     def loadFont(self,file):
         self.font = raylib.load_font(file)
 
-        
-    
+    def drawTexturePro(self,texture:Texture2D,position, destinationSize: tuple[float,float] | list[float,float] | Vector2, rotation=0, origin=(0,0), tint=(255,255,255,255)):
+        if not isinstance(tint,type(Color)):
+            tint = Color(*tint)
+
+        raylib.draw_texture_pro(texture.texture,(0,0,texture.width,texture.height),(position[0],position[1],destinationSize[0],destinationSize[1]),(origin[0],origin[1]),rotation,tint)

@@ -4,7 +4,7 @@ import sys
 
 @dataclass(init=True)
 class AxisAlignedCollider:
-    width :float
+    width: float
     height:float
     position:Vector2
     offset: Vector2

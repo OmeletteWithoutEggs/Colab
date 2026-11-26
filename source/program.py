@@ -1,7 +1,7 @@
 import pyray as raylib
 from pyray import Color
 from source.vectors import Vector2
-from source.rendering import Renderer
+from source.rendering import Renderer,Texture2D
 from source.player import Player
 from source.world import Scene
 import enum
@@ -26,6 +26,7 @@ class Program:
         self.scene = Scene((self.renderer.width,self.renderer.height))
 
         self.player = Player((0,0),(30,30))
+        self.texture = Texture2D("assets/images/image.jpg")
 
     def start(self):
         self.runStart = time.time()
@@ -60,6 +61,8 @@ class Program:
 
     def render(self):
         with self.renderer:
+            
+            self.renderer.drawTexturePro(self.texture,(0,0),(500,500),0,(250,250),(255,255,255,255))
             self.player.draw(self.renderer)
 
 
