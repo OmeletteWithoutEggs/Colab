@@ -1,4 +1,4 @@
-lazy import pyray as raylib
+import pyray as raylib
 from pyray import Color
 from source.vectors import Vector2
 from source.rendering import Renderer
@@ -17,13 +17,8 @@ class Program:
         self.state = GameStates.PAUSED
         self.debugMode = debugMode
 
-
         self.renderer = Renderer(700,800,"Program")
         self.renderer.loadFont("assets\\fonts\\firjar\\Firjar-Bold.ttf")
-
-
-
-
 
     def start(self):
         self.runStart = time.time()
@@ -50,14 +45,6 @@ class Program:
 
     def tick(self):
         self.deltaTime = raylib.get_frame_time()
-
-
-
-
-
-
-
- 
 
     def renderDebug(self):
         raylib.draw_fps(10,10)

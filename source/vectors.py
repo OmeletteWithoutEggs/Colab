@@ -1,5 +1,5 @@
-lazy import math
-lazy import numpy as np
+import math
+import numpy as np
 from swizzle import swizzle
 from dataclasses import dataclass
 
