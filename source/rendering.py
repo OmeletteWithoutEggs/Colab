@@ -18,6 +18,10 @@ class Texture2D:
     def height(self):
         return self.texture.height
 
+    @property
+    def size(self):
+        return Vector2(self.width,self.height)
+
 class Renderer:
     def __init__(self,width,height,title,SSAA_SCALE = 2):
         self.SSAA_SCALE = SSAA_SCALE
@@ -153,7 +157,7 @@ class Renderer:
     def loadFont(self,file):
         self.font = raylib.load_font(file)
 
-    def drawTexturePro(self,texture:Texture2D,position, destinationSize: tuple[float,float] | list[float,float] | Vector2, rotation=0, origin=(0,0), tint=(255,255,255,255)):
+    def drawTexturePro(self,texture:Texture2D,position:tuple[float,float] | Vector2 | list[float,float], destinationSize: tuple[float,float] | list[float,float] | Vector2, rotation=0, origin=(0,0), tint=(255,255,255,255)):
         if not isinstance(tint,type(Color)):
             tint = Color(*tint)
 
