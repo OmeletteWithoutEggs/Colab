@@ -3,6 +3,7 @@ from pyray import Color
 from source.vectors import Vector2
 from source.rendering import Renderer
 from source.player import Player
+from source.world import Scene
 import enum
 import time
 import random
@@ -21,6 +22,8 @@ class Program:
         self.renderer = Renderer(700,800,"Program")
         self.renderer.loadFont("assets\\fonts\\firjar\\Firjar-Bold.ttf")
         self.camera = self.renderer.camera
+
+        self.scene = Scene((self.renderer.width,self.renderer.height))
 
         self.player = Player((0,0),(30,30))
 
