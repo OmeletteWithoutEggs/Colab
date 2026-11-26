@@ -39,7 +39,6 @@ class Player:
         if raylib.is_key_down(raylib.KeyboardKey.KEY_D):
             movement.x += 1
 
-        print(movement)
         self.velocity += movement.normalised() * self.moveSpeed
 
     def updatePhysics(self,deltaTime):
