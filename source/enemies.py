@@ -1,4 +1,6 @@
 from source.vectors import Vector2
+from source.player import Player
+from source.rendering import Renderer
 from source.collisions import AxisAlignedCollider
 
 class Bullet:
@@ -23,3 +25,11 @@ class Enemy:
 
     def update(self,deltaTime):
         self.position += self.velocity * deltaTime
+
+    def draw(self, renderer:Renderer):
+        renderer.drawRectanglePro(self.position, (self.width,self.height),(self.width/2,self.height/2),0,(255,0,0,255))
+
+    def move(self, player:Player):
+        diffPos = self.position - player.position
+        diffPos.normalised(self.moveSpeed)
+        self.velocity = diffPos
