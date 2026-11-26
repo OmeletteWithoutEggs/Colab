@@ -19,6 +19,7 @@ class Program:
 
         self.renderer = Renderer(700,800,"Program")
         self.renderer.loadFont("assets\\fonts\\firjar\\Firjar-Bold.ttf")
+        self.camera = self.renderer.camera
 
     def start(self):
         self.runStart = time.time()
