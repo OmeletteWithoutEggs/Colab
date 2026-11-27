@@ -4,6 +4,7 @@ from source.vectors import Vector2
 from source.rendering import Renderer,Texture2D
 from source.player import Player
 from source.world import Scene
+from source.enemies import Enemy
 import enum
 import time
 import random
@@ -24,8 +25,9 @@ class Program:
         self.camera = self.renderer.camera
 
         self.scene = Scene((self.renderer.width,self.renderer.height))
+        self.scene.addEnemy(Enemy(Vector2(300,300),(30,30),500))
 
-        self.player = Player((0,0),(30,30))
+        self.player = Player((-200,-200),(30,30))
         self.texture = Texture2D("assets/images/test/mountain.jpg")
 
     def start(self):
@@ -55,6 +57,8 @@ class Program:
         self.deltaTime = raylib.get_frame_time()
         self.player.handleInput()
         self.player.updatePhysics(self.deltaTime)
+        self.scene.enemies[0].move(self.player)
+        self.scene.enemies[0].update(self.deltaTime)
 
     def renderDebug(self):
         raylib.draw_fps(10,10)
@@ -65,6 +69,7 @@ class Program:
 
             self.renderer.drawTexturePro(self.texture,(position.x,position.y),self.texture.size,rotation=-90,origin=(self.texture.size/2))
             self.player.draw(self.renderer)
+            self.scene.enemies[0].draw(self.renderer)
 
 
             if self.debugMode:
