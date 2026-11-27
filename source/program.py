@@ -26,7 +26,7 @@ class Program:
         self.scene = Scene((self.renderer.width,self.renderer.height))
 
         self.player = Player((0,0),(30,30))
-        self.texture = Texture2D("assets/images/mountain.jpg")
+        self.texture = Texture2D("assets/images/test/mountain.jpg")
 
     def start(self):
         self.runStart = time.time()
@@ -73,8 +73,3 @@ class Program:
         raylib.draw_fps(10,10)
 
         self.renderer.display()
-
-
-
-
-
