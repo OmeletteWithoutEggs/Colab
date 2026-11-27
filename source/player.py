@@ -15,7 +15,7 @@ class Player:
         self.velocity = Vector2(0,0)
         self.width , self.height = size
         self.collider = AxisAlignedCollider(self.position,(self.width,self.height),(self.width/2,self.height/2))
-        self.moveSpeed = 500
+        self.moveSpeed = 300
     
 
     def collideLevel(self,colliders:list[AxisAlignedCollider]):

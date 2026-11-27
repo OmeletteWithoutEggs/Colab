@@ -24,7 +24,8 @@ class EnemyStates(enum.Enum):
 class Enemy:
     def __init__(self,position,size,speed):
         self.state = EnemyStates.IDLE
-        self.fleeDistance = 400
+        self.fleeDistance = 200
+        self.fleeStep = 400
         self.targetPosition = None
         self.position = Vector2(position)
         self.velocity = Vector2(0,0)
@@ -40,18 +41,19 @@ class Enemy:
         renderer.drawRectanglePro(self.position, (self.width,self.height),(self.width/2,self.height/2),0,(255,0,0,255))
 
     def move(self, player:Player):
+        playerToSelf = self.position - player.position
+        distanceToPlayer = playerToSelf.magnitude
         match self.state:
             case EnemyStates.IDLE:
-                diffPos = self.position - player.position
-                if diffPos.magnitude < self.fleeDistance:
-                    self.targetPosition = self.position - diffPos.normalised(50)
+                if distanceToPlayer < self.fleeDistance:
+                    self.targetPosition = self.position + playerToSelf.normalised(self.fleeStep)
                     self.state = EnemyStates.FLEEING
                 else:
                     self.targetPosition = None
             case EnemyStates.FLEEING:
-                diffPos = self.position - self.targetPosition
-                distanceToTarget = diffPos.magnitude
-                if distanceToTarget > 10:
-                    self.velocity = diffPos.normalised(self.moveSpeed)
+                selfToTarget = self.targetPosition - self.position
+
+                if distanceToPlayer < self.fleeStep:
+                    self.velocity = selfToTarget.normalised(self.moveSpeed)
                 else:
                     self.state = EnemyStates.IDLE

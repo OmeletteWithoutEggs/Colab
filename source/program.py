@@ -25,7 +25,7 @@ class Program:
         self.camera = self.renderer.camera
 
         self.scene = Scene((self.renderer.width,self.renderer.height))
-        self.scene.addEnemy(Enemy(Vector2(300,300),(30,30),500))
+        self.scene.addEnemy(Enemy(Vector2(300,300),(30,30),800))
 
         self.player = Player((-200,-200),(30,30))
         self.texture = Texture2D("assets/images/test/mountain.jpg")
