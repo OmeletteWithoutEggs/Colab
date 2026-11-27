@@ -27,7 +27,7 @@ class Program:
         self.scene = Scene((self.renderer.width,self.renderer.height))
         self.scene.addEnemy(Enemy(Vector2(300,300),(30,30),800))
 
-        self.player = Player((-200,-200),(30,30))
+        self.player = Player((-200,-200),(50,50))
         self.texture = Texture2D("assets/images/test/mountain.jpg")
 
     def start(self):
@@ -67,7 +67,7 @@ class Program:
         with self.renderer:
             position = raylib.get_screen_to_world_2d(raylib.get_mouse_position(),self.camera)
 
-            self.renderer.drawTexturePro(self.texture,(position.x,position.y),self.texture.size,rotation=-90,origin=(self.texture.size/2))
+            # self.renderer.drawTexturePro(self.texture,(position.x,position.y),self.texture.size,rotation=-90,origin=(self.texture.size/2))
             self.player.draw(self.renderer)
             self.scene.enemies[0].draw(self.renderer)
 
