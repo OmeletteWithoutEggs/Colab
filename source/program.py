@@ -1,8 +1,9 @@
 import pyray as raylib
 from pyray import Color
 from source.vectors import Vector2
-from source.rendering import Renderer
+from source.rendering import Renderer,Texture2D
 from source.player import Player
+from source.world import Scene
 import enum
 import time
 import random
@@ -22,7 +23,10 @@ class Program:
         self.renderer.loadFont("assets\\fonts\\firjar\\Firjar-Bold.ttf")
         self.camera = self.renderer.camera
 
+        self.scene = Scene((self.renderer.width,self.renderer.height))
+
         self.player = Player((0,0),(30,30))
+        self.texture = Texture2D("assets/images/test/mountain.jpg")
 
     def start(self):
         self.runStart = time.time()
@@ -57,13 +61,15 @@ class Program:
 
     def render(self):
         with self.renderer:
+            position = raylib.get_screen_to_world_2d(raylib.get_mouse_position(),self.camera)
+
+            self.renderer.drawTexturePro(self.texture,(position.x,position.y),self.texture.size,rotation=-90,origin=(self.texture.size/2))
             self.player.draw(self.renderer)
 
 
             if self.debugMode:
                 self.renderDebug()
+       
+        raylib.draw_fps(10,10)
 
-
-
-
-
+        self.renderer.display()

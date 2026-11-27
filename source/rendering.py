@@ -1,6 +1,27 @@
 import pyray as raylib
 from pyray import Color
 from source.vectors import Vector2
+from dataclasses import dataclass
+from contextlib import contextmanager
+
+@dataclass(init=True)
+class Texture2D:
+    texture : raylib.Texture
+    def __init__(self,path):
+        if path:
+            self.texture = raylib.load_texture(path)
+
+    @property
+    def width(self):
+        return self.texture.width
+
+    @property
+    def height(self):
+        return self.texture.height
+
+    @property
+    def size(self):
+        return Vector2(self.width,self.height)
 
 class Renderer:
     def __init__(self,width,height,title,SSAA_SCALE = 2):
@@ -37,6 +58,8 @@ class Renderer:
             #raylib.unload_render_texture(self.targetWindow)
             self._loadTargetWindow()
 
+
+
     def beginDrawing(self):
         self._handleResize()
         raylib.begin_drawing()
@@ -51,6 +74,8 @@ class Renderer:
         #raylib.begin_drawing()
         #raylib.clear_background(Color(0,0,0,255))
         #raylib.draw_texture_pro(self.targetWindow.texture, self.sourceRect, self.destRect, raylib.Vector2(0,0), 0, Color(255,255,255,255))
+
+    def display(self):
         raylib.end_drawing()
 
     def __enter__(self):
@@ -136,4 +161,9 @@ class Renderer:
 
     def loadFont(self,file):
         self.font = raylib.load_font(file)
-    
+
+    def drawTexturePro(self,texture:Texture2D,position:tuple[float,float] | Vector2 | list[float,float], destinationSize: tuple[float,float] | list[float,float] | Vector2, rotation=0, origin=(0,0), tint=(255,255,255,255)):
+        if not isinstance(tint,type(Color)):
+            tint = Color(*tint)
+
+        raylib.draw_texture_pro(texture.texture,(0,0,texture.width,texture.height),(position[0],position[1],destinationSize[0],destinationSize[1]),(origin[0],origin[1]),rotation,tint)
