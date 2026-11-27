@@ -69,6 +69,10 @@ class Program:
 
             if self.debugMode:
                 self.renderDebug()
+       
+        raylib.draw_fps(10,10)
+
+        self.renderer.display()
 
 
 

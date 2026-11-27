@@ -2,6 +2,7 @@ import pyray as raylib
 from pyray import Color
 from source.vectors import Vector2
 from dataclasses import dataclass
+from contextlib import contextmanager
 
 @dataclass(init=True)
 class Texture2D:
@@ -57,6 +58,8 @@ class Renderer:
             #raylib.unload_render_texture(self.targetWindow)
             self._loadTargetWindow()
 
+
+
     def beginDrawing(self):
         self._handleResize()
         raylib.begin_drawing()
@@ -71,6 +74,8 @@ class Renderer:
         #raylib.begin_drawing()
         #raylib.clear_background(Color(0,0,0,255))
         #raylib.draw_texture_pro(self.targetWindow.texture, self.sourceRect, self.destRect, raylib.Vector2(0,0), 0, Color(255,255,255,255))
+
+    def display(self):
         raylib.end_drawing()
 
     def __enter__(self):
