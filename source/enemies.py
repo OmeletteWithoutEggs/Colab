@@ -1,8 +1,11 @@
 from source.vectors import Vector2
 from source.player import Player
 from source.rendering import Renderer
+from source.animations import Animations
 from source.collisions import AxisAlignedCollider
 import enum
+
+
 
 class Bullet:
     def __init__(self,position,size,speed):
@@ -32,13 +35,14 @@ class Enemy:
         self.moveSpeed = speed
         self.width , self.height = size
         self.collider = AxisAlignedCollider(self.position,(self.width,self.height),(self.width/2,self.height/2))
+        self.images = Animations("assets/images/enemy", 6)
 
     def update(self,deltaTime):
         self.position += self.velocity * deltaTime
         self.velocity = Vector2(0,0)
 
     def draw(self, renderer:Renderer):
-        renderer.drawRectanglePro(self.position, (self.width,self.height),(self.width/2,self.height/2),0,(255,0,0,255))
+        renderer.drawTexturePro(self.images.getCurrentFrame(), self.position, (self.width, self.height))
 
     def move(self, player:Player):
         playerToSelf = self.position - player.position

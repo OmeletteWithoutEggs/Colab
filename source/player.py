@@ -16,7 +16,7 @@ class Player:
         self.velocity = Vector2(0,0)
         self.width , self.height = size
         self.collider = AxisAlignedCollider(self.position,(self.width,self.height),(self.width/2,self.height/2))
-        self.moveSpeed = 300
+        self.moveSpeed = 500
         self.images = Animations("assets/images/player", 6)
     
 
@@ -49,4 +49,5 @@ class Player:
 
 
     def draw(self, renderer:Renderer):
-        renderer.drawRectanglePro(self.position, (self.width,self.height),(self.width/2,self.height/2),0,(255,255,255,255))
+        #renderer.drawRectanglePro(self.position, (self.width,self.height),(self.width/2,self.height/2),0,(255,255,255,255))
+        renderer.drawTexturePro(self.images.getCurrentFrame(), self.position, (self.width, self.height))

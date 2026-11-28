@@ -1,11 +1,16 @@
-from rendering import Renderer, Texture2D
-from program import Player
+from source.rendering import Renderer, Texture2D
 import time
-from vectors import Vector2
-
+import os
 
 class Animations():
-    def __init__(self, images, frameRate):
-        self.images = images
+    def __init__(self, path, frameRate):
+        extraPaths = os.listdir(path)
+        self.images = [Texture2D(path+"/" + extraPath) for extraPath in extraPaths]
+        self.frames = len(self.images)
+        self.secPerFrame = 1/frameRate
         self.frameRate = frameRate
-        self.currentImage = self.images[0]
+
+    def getCurrentFrame(self):
+
+        self.index = int(time.time() / self.secPerFrame) % int(self.frameRate)
+        return self.images[self.index]
