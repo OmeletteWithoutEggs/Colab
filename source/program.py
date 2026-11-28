@@ -27,7 +27,7 @@ class Program:
         self.scene = Scene((self.renderer.width,self.renderer.height))
         self.scene.addEnemy(Enemy((300,300),(100,100),800))
 
-        self.player = Player((-200,-200),(50,50))
+        self.player = Player((-200,-200),(100,100))
         self.texture = Texture2D("assets/images/test/mountain.jpg")
 
     def start(self):

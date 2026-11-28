@@ -58,6 +58,6 @@ class Enemy:
                 selfToTarget = self.targetPosition - self.position
 
                 if distanceToPlayer < self.fleeStep:
-                    self.velocity = selfToTarget.normalised(self.moveSpeed)
+                    self.velocity = playerToSelf.normalised(self.moveSpeed)
                 else:
                     self.state = EnemyStates.IDLE
